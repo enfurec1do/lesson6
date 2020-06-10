@@ -1,6 +1,10 @@
 
 FROM ubuntu:18.04
 
+# Tomcat Version
+ENV TOMCAT_VERSION_MAJOR 8
+ENV TOMCAT_VERSION_FULL  8.5.56
+
 RUN apt update && apt install -y \
     maven \
     git \
@@ -9,9 +13,9 @@ RUN apt update && apt install -y \
 
 WORKDIR /usr/local/tomcat/
 
-RUN wget http://mirror.linux-ia64.org/apache/tomcat/tomcat-8/v8.5.56/bin/apache-tomcat-8.5.56.tar.gz -O tomcat.tar.gz
+RUN wget http://mirror.linux-ia64.org/apache/tomcat/tomcat-${TOMCAT_VERSION_MAJOR}/v${TOMCAT_VERSION_FULL}/bin/apache-tomcat-${TOMCAT_VERSION_FULL}.tar.gz -O tomcat.tar.gz
 
-RUN tar xvfz tomcat.tar.gz && mv apache-tomcat-8.5.56/* /usr/local/tomcat/
+RUN tar xvfz tomcat.tar.gz && mv apache-tomcat-{TOMCAT_VERSION_FULL}/* /usr/local/tomcat/
 
 WORKDIR git
 
